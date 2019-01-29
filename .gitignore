@@ -1,0 +1,5 @@
+lib
+tinykaboom
+tinykaboom.c
+tinykaboom.py
+*.pyc
