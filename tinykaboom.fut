@@ -31,9 +31,8 @@ let noise (x: vec3) =
   let n = vec3.(p `dot` {x=1, y=57, z=113})
   in lerp(lerp(lerp(hash(n +  0), hash(n +  1), f.x),
                lerp(hash(n + 57), hash(n + 58), f.x), f.y),
-          lerp(
-            lerp(hash(n + 113), hash(n + 114), f.x),
-            lerp(hash(n + 170), hash(n + 171), f.x), f.y), f.z)
+          lerp(lerp(hash(n + 113), hash(n + 114), f.x),
+               lerp(hash(n + 170), hash(n + 171), f.x), f.y), f.z)
 
 let rotate v =
   vec3f(vec3f(0.00,  0.80,  0.60) `vec3.dot` v,
@@ -53,7 +52,7 @@ let fractal_brownian_motion (x: vec3) =
   in f/0.9375
 
 let palette_fire (d: f32): vec3 =
-  let yellow = vec3f (1.7, 1.3, 1.0) -- note that the color is "hot", i.e. has components >1
+  let yellow = vec3f (1.7, 1.3, 1.0)
   let orange = vec3f (1.0, 0.6, 0.0)
   let red = vec3f (1.0, 0.0, 0.0)
   let darkgray = vec3f (0.2, 0.2, 0.2)
