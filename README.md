@@ -19,7 +19,7 @@ are not really very dark.
 
 I depend on two small Futhark packages
 ([vector](https://github.com/athas/vector) and
-([https://github.com/athas/matte](matte)) for vector and ARGB
+([matte](https://github.com/athas/matte)) for vector and ARGB
 colouring respectively.  If I were enough of a purist, I'd inline the
 necessary parts.
 
