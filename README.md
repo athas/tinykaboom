@@ -18,7 +18,7 @@ I think I do the colour computation slightly differently - my darks
 are not really very dark.
 
 I depend on two small Futhark packages
-([vector](https://github.com/athas/vector) and
+([vector](https://github.com/athas/vector)) and
 ([matte](https://github.com/athas/matte)) for vector and ARGB
 colouring respectively.  If I were enough of a purist, I'd inline the
 necessary parts.
