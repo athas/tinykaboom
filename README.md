@@ -14,7 +14,7 @@ purposes:
 
 It looks like this:
 
-![](tinykaboom.webm)
+![](tinykaboom.gif)
 
 ## Details
 

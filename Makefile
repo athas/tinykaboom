@@ -7,8 +7,14 @@ lib: futhark.pkg
 run: tinykaboom.py
 	python tinykaboom-gui.py
 
-tinykaboom.webm: frames
-	ffmpeg -r 60 -i frames/%03d.png -c:v libvpx -b:v 3M -c:a libvorbis $@
+tinykaboom.mp4: frames
+	ffmpeg -r 60 -y -i frames/%03d.png -b:v 3M $@
+
+tinykaboom.gif: tinykaboom.mp4 tinykaboom-palette.png
+	ffmpeg -r 60 -y -i tinykaboom.mp4 -i tinykaboom-palette.png -filter_complex paletteuse $@
+
+tinykaboom-palette.png: tinykaboom.mp4
+	ffmpeg -y -i $< -vf palettegen $@
 
 frames: tinykaboom.py
 	python3 tinykaboom-frames.py frames
