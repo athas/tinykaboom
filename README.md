@@ -12,6 +12,10 @@ purposes:
 
   * If fast enough, to render the explosion in real time.
 
+It looks like this:
+
+![](tinykaboom.webm)
+
 ## Details
 
 I tried to match the coding style closely, even in the naming and
