@@ -12,7 +12,8 @@ purposes:
 
   * If fast enough, to render the explosion in real time.
 
-It looks like this:
+It looks like this (the actual rendering is much faster; I think
+browsers don't like high-framerate GIFs):
 
 ![](tinykaboom.gif)
 
