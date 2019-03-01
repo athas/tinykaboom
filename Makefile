@@ -1,11 +1,11 @@
-tinykaboom.py: tinykaboom.fut lib
-	futhark pyopencl --library $<
+PROGNAME=tinykaboom
+include lib/github.com/diku-dk/lys/common.mk
 
 lib: futhark.pkg
 	futhark pkg sync
 
-run: tinykaboom.py
-	python tinykaboom-gui.py
+tinykaboom.py: tinykaboom.fut
+	futhark pyopencl --library tinykaboom.fut
 
 tinykaboom.mp4: frames
 	ffmpeg -r 60 -y -i frames/%03d.png -b:v 3M $@
@@ -18,6 +18,3 @@ tinykaboom-palette.png: tinykaboom.mp4
 
 frames: tinykaboom.py
 	python3 tinykaboom-frames.py frames
-
-clean:
-	rm -f *.py tinykaboom.py

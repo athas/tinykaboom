@@ -105,3 +105,27 @@ let main (t: f32) (width: i32) (height: i32): [height][width]argb.colour =
             in argb.from_rgba x y z 1
        else argb.from_rgba 0.2 0.7 0.8 1
   in tabulate_2d height width f
+
+import "lib/github.com/diku-dk/lys/lys"
+
+module lys: lys with text_content = f32 = {
+
+  type text_content = f32
+  let text_format = "FPS: %.2f"
+  let text_colour _ = argb.black
+  let text_content (ms: f32) _ = 1000/ms
+
+  type state = {t:f32, h:i32, w:i32}
+
+  let init h w: state = {t=0, h, w}
+
+  let step td (s: state) = s with t = s.t + td
+
+  let resize h w (s: state) = s with h = h with w = w
+
+  let key _ _ s = s
+  let mouse _ _ _ s = s
+  let wheel _ _ s = s
+
+  let render (s: state) = main s.t s.w s.h
+}

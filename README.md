@@ -17,6 +17,15 @@ browsers don't like high-framerate GIFs):
 
 ![](tinykaboom.gif)
 
+## Compiling
+
+Run
+
+```
+futhark pkg sync
+make run
+```
+
 ## Details
 
 I tried to match the coding style closely, even in the naming and

@@ -1,8 +1,9 @@
 lib
 frames
 tinykaboom
-tinykaboom.c
 tinykaboom.py
+tinykaboom.c
 tinykaboom-palette.png
 tinykaboom.mp4
 *.pyc
+tinykaboom_*
