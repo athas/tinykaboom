@@ -108,12 +108,12 @@ let main (t: f32) (width: i32) (height: i32): [height][width]argb.colour =
 
 import "lib/github.com/diku-dk/lys/lys"
 
-module lys: lys with text_content = f32 = {
+module lys: lys with text_content = i32 = {
 
-  type text_content = f32
-  let text_format = "FPS: %.2f"
+  type text_content = i32
+  let text_format = "FPS: %d"
   let text_colour _ = argb.black
-  let text_content (ms: f32) _ = 1000/ms
+  let text_content fps _ = t32 fps
 
   type state = {t:f32, h:i32, w:i32}
 
@@ -126,6 +126,7 @@ module lys: lys with text_content = f32 = {
   let key _ _ s = s
   let mouse _ _ _ s = s
   let wheel _ _ s = s
+  let grab_mouse = false
 
   let render (s: state) = main s.t s.w s.h
 }
