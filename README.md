@@ -17,7 +17,7 @@ browsers don't like high-framerate GIFs):
 
 ![](tinykaboom.gif)
 
-## Compiling
+## Compiling and running
 
 Run
 
@@ -45,7 +45,7 @@ are not really very dark.
 
 I depend on two small Futhark packages
 ([vector](https://github.com/athas/vector)) and
-([matte](https://github.com/athas/matte)) for vector and ARGB
+([matte](https://github.com/athas/matte)) for vectors and ARGB
 colouring respectively.  If I were enough of a purist, I'd inline the
 necessary parts.  The 110 lines mentioned in the title do not include
 these packages.
@@ -64,14 +64,7 @@ compiled with `-O3 -fopenmp` and running on a Ryzen 1700X: 1.3s
 It runs slightly slower than I would like, especially on the Vega 64,
 but that's probably just the nature of the beast.  I inspected the
 generated code and could not find any obvious smoking guns, except for
-the kernel being fairly large.
-
-## The animation
-
-Performance is good enough to be real time-ish.  If you have Python,
-[PySDL2](https://pypi.org/project/PySDL2/), and
-[PyOpenCL](https://documen.tician.de/pyopencl/) installed, do `make
-run` to see the animation.
+the kernel being fairly large.  It's good enough to be real-time in a small window.
 
 ## The future
 
