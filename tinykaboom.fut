@@ -22,7 +22,7 @@ let lerp (v0, v1, t) =
   v0 + (v1-v0)*f32.max 0 (f32.min 1 t)
 
 let vlerp (v0, v1, t) =
-  v0 vec3.+ vec3.(f32.max 0 (f32.min 1 t) `scale` (v0 + (v1-v0)))
+  vec3.map2 (\x y -> lerp (x, y, t)) v0 v1
 
 let noise (x: vec3) =
   let p = {x = f32.floor(x.x), y = f32.floor(x.y), z = f32.floor(x.z)}
