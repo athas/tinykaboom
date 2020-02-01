@@ -111,7 +111,7 @@ import "lib/github.com/diku-dk/lys/lys"
 module lys: lys with text_content = i32 = {
 
   type text_content = i32
-  let text_format = "FPS: %d"
+  let text_format () = "FPS: %d"
   let text_colour _ = argb.black
   let text_content fps _ = t32 fps
   let grab_mouse = false
