@@ -87,12 +87,12 @@ let distance_field_normal t pos =
   let nz = signed_distance t (pos vec3.+ vec3f(0, 0, eps)) - d
   in vec3.normalise (vec3f(nx, ny, nz))
 
-let main (t: f32) (width: i32) (height: i32): [height][width]argb.colour =
+let main (t: f32) (width: i64) (height: i64): [height][width]argb.colour =
   let fov = f32.pi/3
-  let f (j: i32) (i: i32) =
-    let dir_x = (r32 i + 0.5) - r32 width/2
-    let dir_y = -(r32 j + 0.5) + r32 height/2
-    let dir_z = -(r32 height)/(2*f32.tan(fov/2))
+  let f j i =
+    let dir_x = (f32.i64 i + 0.5) - f32.i64 width/2
+    let dir_y = -(f32.i64 j + 0.5) + f32.i64 height/2
+    let dir_z = -(f32.i64 height)/(2*f32.tan(fov/2))
     let (is_hit, hit) =
       sphere_trace t (vec3f(0, 0, 3),
                       vec3.normalise (vec3f(dir_x, dir_y, dir_z)))
@@ -116,7 +116,7 @@ module lys: lys with text_content = i32 = {
   let text_content fps _ = t32 fps
   let grab_mouse = false
 
-  type state = {t:f32, h:i32, w:i32}
+  type state = {t:f32, h:i64, w:i64}
 
   let init _ h w: state = {t=0, h, w}
 
