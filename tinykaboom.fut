@@ -1,7 +1,7 @@
 -- The time for the benchmark is chosen to match the exact scene
 -- rendered by tinykaboom.cpp.
 -- ==
--- input { 6.28f32 640 480 }
+-- input { 6.28f32 640i64 480i64 }
 
 let sphere_radius: f32 = 1.5
 let noise_amplitude: f32 = 1.0
