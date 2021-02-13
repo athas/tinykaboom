@@ -15,16 +15,19 @@ purposes:
 It looks like this (the actual rendering is much faster; I think
 browsers don't like high-framerate GIFs):
 
-![](tinykaboom.gif)
+```futhark
+module tk = import "tinykaboom"
 
-## Compiling and running
-
-Run
+let step = tk.main
+```
 
 ```
-futhark pkg sync
-make run
+> :video (step 640i64 480i64 4.1e-2f32, 0.0f32, 300i64)
 ```
+
+
+![](README-img/video12.gif)
+
 
 ## Details
 
@@ -57,9 +60,11 @@ The runtime when rendering a 640x480 frame is as follows:
   * [`tinykaboom.cpp`](https://github.com/ssloy/tinykaboom/blob/master/tinykaboom.cpp)
 compiled with `-O3 -fopenmp` and running on a Ryzen 1700X: 1.3s
 
-  * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark opencl` and running on a Vega 64: 0.022s
+  * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark opencl` and running on a Vega 64: 0.012s
 
-  * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark cuda` and running on a GTX 780: 0.011s
+  * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark multicore` and running on a Ryzen 1700X: 0.5s
+
+  * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark cuda` and running on an RTX 2080 Ti: 0.003s
 
 It runs slightly slower than I would like, especially on the Vega 64,
 but that's probably just the nature of the beast.  I inspected the

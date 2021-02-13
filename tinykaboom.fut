@@ -1,7 +1,7 @@
 -- The time for the benchmark is chosen to match the exact scene
 -- rendered by tinykaboom.cpp.
 -- ==
--- input { 6.28f32 640i64 480i64 }
+-- input { 640i64 480i64 0.1f32 6.28f32 }
 
 let sphere_radius: f32 = 1.5
 let noise_amplitude: f32 = 1.0
@@ -87,7 +87,7 @@ let distance_field_normal t pos =
   let nz = signed_distance t (pos vec3.+ vec3f(0, 0, eps)) - d
   in vec3.normalise (vec3f(nx, ny, nz))
 
-let main (t: f32) (width: i64) (height: i64): [height][width]argb.colour =
+let main (width: i64) (height: i64) (td: f32) (t: f32): ([height][width]argb.colour, f32) =
   let fov = f32.pi/3
   let f j i =
     let dir_x = (f32.i64 i + 0.5) - f32.i64 width/2
@@ -104,28 +104,4 @@ let main (t: f32) (width: i64) (height: i64): [height][width]argb.colour =
               light_intensity `vec3.scale` palette_fire((noise_level - 0.2)*2)
             in argb.from_rgba x y z 1
        else argb.from_rgba 0.2 0.7 0.8 1
-  in tabulate_2d height width f
-
-import "lib/github.com/diku-dk/lys/lys"
-
-module lys: lys with text_content = i32 = {
-
-  type text_content = i32
-  let text_format () = "FPS: %d"
-  let text_colour _ = argb.black
-  let text_content fps _ = t32 fps
-  let grab_mouse = false
-
-  type state = {t:f32, h:i64, w:i64}
-
-  let init _ h w: state = {t=0, h, w}
-
-  let event (e: event) (s: state) =
-    match e
-    case #step td -> s with t = s.t + td
-    case _ -> s
-
-  let resize h w (s: state) = s with h = h with w = w
-
-  let render (s: state) = main s.t s.w s.h
-}
+  in (tabulate_2d height width f, t + td)

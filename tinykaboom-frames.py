@@ -26,7 +26,7 @@ except FileExistsError:
     pass
 
 for i in range(frames):
-    fut_image = tinykaboom.main(i*(1/fps), width, height).get()
+    fut_image, _ = tinykaboom.step(width, height, 1/fps, i*(1/fps)).get()
     fname = os.path.join(dir, '%.3d.png' % i)
 
     # Futhark gives us an array of 32-bit integers encoding the color,

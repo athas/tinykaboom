@@ -1,5 +1,9 @@
-PROGNAME=tinykaboom
-include lib/github.com/diku-dk/lys/common.mk
+FUTHARK_BACKEND?=multicore
+
+all: tinykaboom.mp4
+
+README.md: README.fut
+	futhark literate --backend=$(FUTHARK_BACKEND) README.fut
 
 lib: futhark.pkg
 	futhark pkg sync
