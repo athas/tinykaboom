@@ -19,7 +19,7 @@ type vec3 = vec3.vector
 let vec3f (x, y, z): vec3 = {x,y,z}
 
 let lerp (v0, v1, t) =
-  v0 + (v1-v0)*f32.max 0 (f32.min 1 t)
+  f32.lerp v0 v1 (f32.max 0 (f32.min 1 t))
 
 let vlerp (v0, v1, t) =
   vec3.map2 (\x y -> lerp (x, y, t)) v0 v1

@@ -2,7 +2,7 @@ FUTHARK_BACKEND?=multicore
 
 all: tinykaboom.mp4
 
-README.md: README.fut
+README.md: README.fut tinykaboom.fut
 	futhark literate --backend=$(FUTHARK_BACKEND) README.fut
 
 lib: futhark.pkg
