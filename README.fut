@@ -56,7 +56,7 @@ let step = tk.main
 
 --   * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark opencl` and running on a Vega 64: 0.012s
 
---   * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark multicore` and running on a Ryzen 1700X: 0.5s
+--   * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark multicore` and running on a Ryzen 1700X: 0.38s
 
 --   * [`tinykaboom.fut`](https://github.com/athas/tinykaboom/blob/master/tinykaboom.fut) compiled with `futhark cuda` and running on an RTX 2080 Ti: 0.003s
 
