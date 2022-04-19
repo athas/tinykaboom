@@ -26,7 +26,7 @@ let step = tk.main
 ```
 
 
-![](README-img/4ed9dbbdb8f23474-video.gif)
+![](README-img/86037198c9e85dccfc49aa1668c12cbe-video.gif)
 
 
 ## Details
