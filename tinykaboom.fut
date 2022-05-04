@@ -3,10 +3,10 @@
 -- ==
 -- input { 640i64 480i64 0.1f32 6.28f32 }
 
-let sphere_radius: f32 = 1.5
-let noise_amplitude: f32 = 1.0
+def sphere_radius: f32 = 1.5
+def noise_amplitude: f32 = 1.0
 
-let hash n =
+def hash n =
   let x = f32.sin(n)*43758.5453
   in x-f32.floor(x)
 
@@ -16,15 +16,15 @@ import "lib/github.com/athas/matte/colour"
 module vec3 = mk_vspace_3d f32
 type vec3 = vec3.vector
 
-let vec3f (x, y, z): vec3 = {x,y,z}
+def vec3f (x, y, z): vec3 = {x,y,z}
 
-let lerp (v0, v1, t) =
+def lerp (v0, v1, t) =
   f32.lerp v0 v1 (f32.max 0 (f32.min 1 t))
 
-let vlerp (v0, v1, t) =
+def vlerp (v0, v1, t) =
   vec3.map2 (\x y -> lerp (x, y, t)) v0 v1
 
-let noise (x: vec3) =
+def noise (x: vec3) =
   let p = {x = f32.floor(x.x), y = f32.floor(x.y), z = f32.floor(x.z)}
   let f = {x = x.x-p.x, y = x.y-p.y, z = x.z-p.z}
   let f = vec3.((f `dot` ({x=3,y=3,z=3} - scale 2 f)) `scale` f)
@@ -34,12 +34,12 @@ let noise (x: vec3) =
           lerp(lerp(hash(n + 113), hash(n + 114), f.x),
                lerp(hash(n + 170), hash(n + 171), f.x), f.y), f.z)
 
-let rotate v =
+def rotate v =
   vec3f(vec3f(0.00,  0.80,  0.60) `vec3.dot` v,
         vec3f(-0.80,  0.36, -0.48) `vec3.dot` v,
         vec3f(-0.60, -0.48,  0.64) `vec3.dot` v)
 
-let fractal_brownian_motion (x: vec3) =
+def fractal_brownian_motion (x: vec3) =
   let p = rotate x
   let f = 0
   let f = f + 0.5000*noise p
@@ -51,7 +51,7 @@ let fractal_brownian_motion (x: vec3) =
   let f = f + 0.0625*noise p
   in f/0.9375
 
-let palette_fire (d: f32): vec3 =
+def palette_fire (d: f32): vec3 =
   let yellow = vec3f (1.7, 1.3, 1.0)
   let orange = vec3f (1.0, 0.6, 0.0)
   let red = vec3f (1.0, 0.0, 0.0)
@@ -64,11 +64,11 @@ let palette_fire (d: f32): vec3 =
      else if x < 0.75 then vlerp(red, orange, x*4-2)
      else vlerp(orange, yellow, x*4-3)
 
-let signed_distance t p =
+def signed_distance t p =
   let displacement = -fractal_brownian_motion(3.4 `vec3.scale` p) * noise_amplitude
   in vec3.norm p - (sphere_radius * f32.sin(t*0.25) + displacement)
 
-let sphere_trace t (orig: vec3, dir: vec3): (bool, vec3) =
+def sphere_trace t (orig: vec3, dir: vec3): (bool, vec3) =
   let check (i, hit) = (i == 1337, hit) in
   if (orig `vec3.dot` orig) - (orig `vec3.dot` dir) ** 2 > sphere_radius ** 2
   then (false, orig)
@@ -79,7 +79,7 @@ let sphere_trace t (orig: vec3, dir: vec3): (bool, vec3) =
           then (1337, pos)
           else (i + 1, pos vec3.+ ((f32.max (d*0.1) 0.1) `vec3.scale` dir))
 
-let distance_field_normal t pos =
+def distance_field_normal t pos =
   let eps = 0.1
   let d = signed_distance t pos
   let nx = signed_distance t (pos vec3.+ vec3f(eps, 0, 0)) - d
@@ -87,7 +87,7 @@ let distance_field_normal t pos =
   let nz = signed_distance t (pos vec3.+ vec3f(0, 0, eps)) - d
   in vec3.normalise (vec3f(nx, ny, nz))
 
-let main (width: i64) (height: i64) (td: f32) (t: f32): ([height][width]argb.colour, f32) =
+def main (width: i64) (height: i64) (td: f32) (t: f32): ([height][width]argb.colour, f32) =
   let fov = f32.pi/3
   let f j i =
     let dir_x = (f32.i64 i + 0.5) - f32.i64 width/2
